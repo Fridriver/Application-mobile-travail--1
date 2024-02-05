@@ -1,15 +1,16 @@
-package classes;
+package com.semisoftnicolas.travail1.classes;
 
 public class Eleve {
 
-    String nom, prenom, numTel, courriel, presence;
+    String nom, prenom, numTel, courriel;
+    boolean presence;
 
-    public Eleve(String nom, String prenom, String numTel, String courriel, String presence) {
+    public Eleve(String nom, String prenom, String numTel, String courriel) {
         this.nom = nom;
         this.prenom = prenom;
         this.numTel = numTel;
         this.courriel = courriel;
-        this.presence = presence;
+        this.presence = false;
     }
 
     public String getNom() {
@@ -44,11 +45,11 @@ public class Eleve {
         this.courriel = courriel;
     }
 
-    public String getPresence() {
+    public boolean isPresence() {
         return presence;
     }
 
-    public void setPresence(String presence) {
+    public void setPresence(boolean presence) {
         this.presence = presence;
     }
 }
