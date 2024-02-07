@@ -14,10 +14,17 @@ import java.util.List;
 
 public class AdapterListe extends RecyclerView.Adapter {
 
+    public interface InterfaceEleve {
+        public void detailEleveClick(int position, Eleve eleve);
+    }
+
+    InterfaceEleve interfaceEleve;
+
     List<Eleve> liste;
 
-    public AdapterListe(List<Eleve> liste) {
+    public AdapterListe(List<Eleve> liste, InterfaceEleve interfaceEleve) {
         this.liste = liste;
+        this.interfaceEleve = interfaceEleve;
     }
 
     @NonNull
@@ -46,7 +53,9 @@ public class AdapterListe extends RecyclerView.Adapter {
     }
 
     public class MonViewHolder extends RecyclerView.ViewHolder {
+
         TextView tvNom, tvPrenom, tvNumTel, tvCourriel, tvPresence;
+
         public MonViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNom = itemView.findViewById(R.id.tvNom);
@@ -54,6 +63,13 @@ public class AdapterListe extends RecyclerView.Adapter {
             tvNumTel = itemView.findViewById(R.id.tvNumTel);
             tvCourriel = itemView.findViewById(R.id.tvCourriel);
             tvPresence = itemView.findViewById(R.id.tvPresence);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    interfaceEleve.detailEleveClick(getLayoutPosition(), liste.get(getLayoutPosition()));
+                }
+            });
         }
     }
 }

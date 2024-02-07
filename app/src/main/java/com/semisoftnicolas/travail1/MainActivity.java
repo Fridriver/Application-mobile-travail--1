@@ -1,6 +1,7 @@
 package com.semisoftnicolas.travail1;
 
 import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,10 +23,10 @@ import com.semisoftnicolas.travail1.classes.Eleve;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterListe.InterfaceEleve {
 
     FloatingActionButton btn_add;
-    AdapterListe adapterListe;
+    Button btn_details;
 
     ActivityResultLauncher<Intent> launcher;
     @Override
@@ -32,21 +34,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        launcher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == Activity.RESULT_OK) {
-                    Intent intentRetour = result.getData();
-
-                    String textRetour = intentRetour.getStringExtra("textRetour");
-                    Toast.makeText(this, "Valeur retour : " + textRetour, Toast.LENGTH_SHORT).show();
-                }
-            }
-        );
-
         List<Eleve> liste = new ArrayList<>();
 
         RecyclerView rv;
+        Context context;
 
         rv = findViewById(R.id.rv);
         rv.setHasFixedSize(true);
@@ -57,11 +48,37 @@ public class MainActivity extends AppCompatActivity {
         liste.add(new Eleve("Gagnon", "Pierre", "514-555-5555", "gagnon.pierre@email.com"));
         liste.add(new Eleve("Lemieux", "Sophie", "514-555-5555", "lemieux.sophie@email.com"));
 
-        adapterListe = new AdapterListe(liste);
+        AdapterListe adapterListe = new AdapterListe(liste, this);
         rv.setAdapter(adapterListe);
 
+//        btn_details = findViewById(R.id.btn_modifier);
+//        btn_details.setOnClickListener(view -> detailEleveClick());
         btn_add = findViewById(R.id.btn_add);
         btn_add.setOnClickListener(v -> btnAjouterEleveClick());
+
+//        launcher = registerForActivityResult(
+//                new ActivityResultContracts.StartActivityForResult(),
+//                result -> {
+//                    if (result.getResultCode() == Activity.RESULT_OK) {
+//                        Intent intentRetour = result.getData();
+//
+//                        String textRetour = intentRetour.getStringExtra("textRetour");
+//                        Toast.makeText(this, "Valeur retour : " + textRetour, Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//        );
+
+        context = this;
+
+        launcher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        Toast.makeText(context, "Text", Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
     }
 
     public void btnAjouterEleveClick()
@@ -70,9 +87,10 @@ public class MainActivity extends AppCompatActivity {
         launcher.launch(intent);
     }
 
-    public void detailEleveClick(int position)
+    public void detailEleveClick(int position, Eleve eleve)
     {
         Intent intent = new Intent(this, ThirdActivity.class);
-        startActivity(intent);
+        intent.putExtra("nom",eleve.getNom());
+        launcher.launch(intent);
     }
 }
