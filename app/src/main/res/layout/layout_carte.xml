@@ -60,11 +60,17 @@
                 android:id="@+id/tvPresence"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
                 android:text="TextView"
                 android:textAlignment="textStart"
                 android:textColor="#FF7474"
                 android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/btn_modifier"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_modifier" />
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
