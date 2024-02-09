@@ -45,6 +45,7 @@ public class AdapterListe extends RecyclerView.Adapter {
         monViewHolder.tvNumTel.setText(eleve.getNumTel());
         monViewHolder.tvCourriel.setText(eleve.getCourriel());
         monViewHolder.tvPresence.setText(eleve.isPresence() ? "Présent" : "Absent");
+        monViewHolder.tvPresence.setTextColor(eleve.isPresence() ? 0xFF00FF00 : 0xFFFF0000);
 
     }
 
