@@ -29,6 +29,7 @@ public class ThirdActivity extends AppCompatActivity {
         tvNumTel.setText(intent.getStringExtra("numTel"));
         tvCourriel.setText(intent.getStringExtra("courriel"));
         tvPresence.setText(intent.getBooleanExtra("presence", false) ? "Présent" : "Absent");
+        tvPresence.setTextColor(intent.getBooleanExtra("presence", false) ? 0xFF00FF00 : 0xFFFF0000);
     }
 
     @Override
