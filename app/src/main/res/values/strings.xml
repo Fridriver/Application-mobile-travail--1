@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">Travail#1</string>
-    <string name="btn_modifier">Détails</string>
+    <string name="btn_details">Détails</string>
+    <string name="btn_ajouter">Ajouter</string>
+
+    <!-- Text hint -->
+    <string name="edNom">Entrez votre nom</string>
+    <string name="edPrenom">Entrez votre prénom</string>
+    <string name="edNumTel">Entrez votre numéro de téléphone</string>
+    <string name="edCourriel">Entrez votre courriel</string>
 </resources>

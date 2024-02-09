@@ -3,6 +3,7 @@ package com.semisoftnicolas.travail1.classes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +16,7 @@ import java.util.List;
 public class AdapterListe extends RecyclerView.Adapter {
 
     public interface InterfaceEleve {
-        public void detailEleveClick(int position, Eleve eleve);
+        public void detailEleveClick(Eleve eleve);
     }
 
     InterfaceEleve interfaceEleve;
@@ -52,9 +53,21 @@ public class AdapterListe extends RecyclerView.Adapter {
         return liste.size();
     }
 
+    public void ajouterEleve(Eleve eleve) {
+        liste.add(eleve);
+        notifyItemInserted(liste.size() - 1);
+    }
+
+    public void supprimerEleve(int position) {
+        liste.remove(position);
+        notifyItemRemoved(position);
+    }
+
     public class MonViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvNom, tvPrenom, tvNumTel, tvCourriel, tvPresence;
+
+        Button btnDetails;
 
         public MonViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,11 +76,29 @@ public class AdapterListe extends RecyclerView.Adapter {
             tvNumTel = itemView.findViewById(R.id.tvNumTel);
             tvCourriel = itemView.findViewById(R.id.tvCourriel);
             tvPresence = itemView.findViewById(R.id.tvPresence);
+            btnDetails = itemView.findViewById(R.id.btnDetails);
+
+            btnDetails.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    interfaceEleve.detailEleveClick(liste.get(getLayoutPosition()));
+                }
+            });
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    interfaceEleve.detailEleveClick(getLayoutPosition(), liste.get(getLayoutPosition()));
+                    Eleve eleve = liste.get(getLayoutPosition());
+                    eleve.setPresence(!eleve.isPresence());
+                    notifyItemChanged(getLayoutPosition());
+                }
+            });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    supprimerEleve(getLayoutPosition());
+                    return true;
                 }
             });
         }

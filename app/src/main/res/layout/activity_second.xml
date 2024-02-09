@@ -6,55 +6,68 @@
     android:layout_height="match_parent"
     tools:context=".ThirdActivity">
 
-    <TextView
-        android:id="@+id/tvCourriel"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="#EBEBEB"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="101dp" />
+        android:elevation="2dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tvPrenom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="#EBEBEB"
-        android:textSize="24sp"
-        tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="47dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:background="#002751"
+            android:backgroundTint="#002751"
+            android:orientation="vertical"
+            android:padding="15dp">
 
-    <TextView
-        android:id="@+id/tvNumTel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="#EBEBEB"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="80dp" />
+            <EditText
+                android:id="@+id/tvNom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/edNom"
+                android:textColor="#EBEBEB"
+                android:textColorHint="#FFFFFF"
+                android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/tvPresence"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textColor="#FF7474"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="123dp" />
+            <EditText
+                android:id="@+id/tvPrenom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/edPrenom"
+                android:textColor="#EBEBEB"
+                android:textColorHint="#FFFFFF"
+                android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/tvNom"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textColor="#EBEBEB"
-        android:textSize="24sp"
-        tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="15dp" />
+            <EditText
+                android:id="@+id/tvNumTel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/edNumTel"
+                android:textColor="#EBEBEB"
+                android:textColorHint="#FFFFFF"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/tvCourriel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/edCourriel"
+                android:textColor="#EBEBEB"
+                android:textColorHint="#FFFFFF"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/btnAdd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_ajouter" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
